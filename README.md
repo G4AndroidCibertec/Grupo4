@@ -2,5 +2,4 @@
 
 Aldo Salazar
 Manuel Dipas
-Michael Parraga
-Pedro García
+Pedro GarcÃ­a
