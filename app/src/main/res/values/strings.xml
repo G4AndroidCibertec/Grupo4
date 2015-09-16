@@ -1,0 +1,38 @@
+<resources>
+
+    <string name="paciente">Paciente</string>
+    <string name="nuevo_paciente">Nuevo Paciente</string>
+    <string name="listar_pacientes">Listar Pacientes</string>
+    <string name="nueva_cita">Nueva Cita</string>
+    <string name="cerrar">Cerrar Sesión</string>
+
+    <string name="fecha">Fecha</string>
+
+    <string name="inicio">Mis Pacientes</string>
+    <string name="usuario">Usuario</string>
+    <string name="clave">Clave</string>
+    <string name="ingresa">Ingresar</string>
+
+    <string name="cita">Cita</string>
+    <string name="hora_inicio">Inicio</string>
+    <string name="hora_fin">Fin</string>
+    <string name="pregunta">¿Visita a domilio?</string>
+
+    <string name="lcita">Lista de citas</string>
+    <string name="verHC">Historia clínica</string>
+
+    <string name="error_fecha">Ingresar fecha: dd/mm/aaaa</string>
+    <string name="error_hora">Ingresar hora: hh:00pm</string>
+    <string name="error_hora_fin">Fin debe ser mayor a Inicio</string>
+    <string name="ok_eliminar_cita">Cita eliminada</string>
+    <string name="ok_insertar_cita">Nueva Cita registrada</string>
+    <string name="validaHoraFin">Fin debe ser mayor a Inicio</string>
+
+    <string name="guardar">Guardar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="no_ingresa">Usuario o clave incorrectos</string>
+    <string name="error_usuario">Ingresa usuario</string>
+    <string name="error_clave">Ingresa clave</string>
+
+
+</resources>
