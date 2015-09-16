@@ -12,9 +12,6 @@ import java.util.List;
 import grupo4.histoclici.R;
 import grupo4.histoclici.entidad.Paciente;
 
-/**
- * Created by pedro_jx on 31/08/2015.
- */
 public class ASPaciente extends ArrayAdapter<Paciente> {
 
     public ASPaciente(Context context, List<Paciente> objects) {
