@@ -98,13 +98,13 @@ public class ActivityListaCita extends AppCompatActivity implements ARVListaCita
         dpFechaCita = (DatePicker) findViewById(R.id.dpFechaCita);
         dpFechaCita.init(fecha.get(Calendar.YEAR), fecha.get(Calendar.MONTH), fecha.get(Calendar.DATE), seleccionarFecha);
 
-        try {
+       /* try {
             dataBaseHelper = new DataBaseHelper(ActivityListaCita.this);
             dataBaseHelper.createDataBase();
             dataBaseHelper.openDataBase();
         } catch (Exception ex) {
             ex.printStackTrace();
-        }
+        }*/
 
         String fechaOnCreate = String.format("%02d/%02d/%s", fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH) + 1), fecha.get(Calendar.YEAR));
         arvListaCita = new ARVListaCita(ActivityListaCita.this, fechaOnCreate);
@@ -130,7 +130,7 @@ public class ActivityListaCita extends AppCompatActivity implements ARVListaCita
                 startActivityForResult(i, REQUEST_CODE_INSERTAR_CITA);
             } else if (actividad.equals("Cerrar Sesión")) {
                 Toast.makeText(ActivityListaCita.this, ((TextView) v).getText(), Toast.LENGTH_SHORT).show();
-                dataBaseHelper.close();
+
                 finish();
             }
             //Aldo le pones las actividades que vayas a crear, sugerencias: ActivityPaciente y ActivityListaPaciente

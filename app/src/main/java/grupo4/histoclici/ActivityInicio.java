@@ -62,10 +62,9 @@ public class ActivityInicio extends AppCompatActivity {
                 spe.putInt(ARG_IDMEDICO, medico.getIdMedico());
                 spe.putString(ARG_MEDICO, medico.getMedico());
                 spe.commit();
-
                 Intent iIngresa = new Intent(ActivityInicio.this, ActivityListaCita.class);
-                finish();
                 startActivity(iIngresa);
+                finish();
             }
             else{
                 Toast.makeText(ActivityInicio.this, R.string.no_ingresa, Toast.LENGTH_SHORT).show();
@@ -75,9 +74,4 @@ public class ActivityInicio extends AppCompatActivity {
         }
     };
 
-    @Override
-    protected void onDestroy() {
-        dataBaseHelper.close();
-        super.onDestroy();
-    }
 }
