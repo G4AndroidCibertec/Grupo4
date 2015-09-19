@@ -36,6 +36,10 @@
             android:name=".ActivityPaciente"
             android:label="@string/paciente" >
         </activity>
+        <activity
+            android:name=".ActivityAtencion"
+            android:label="@string/atencion" >
+        </activity>
     </application>
 
 </manifest>

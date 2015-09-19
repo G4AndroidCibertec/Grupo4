@@ -5,6 +5,7 @@
     <string name="listar_pacientes">Listar Pacientes</string>
     <string name="nueva_cita">Nueva Cita</string>
     <string name="cerrar">Cerrar Sesión</string>
+    <string name="atencion">Atención</string>
 
     <string name="fecha">Fecha</string>
 
@@ -54,6 +55,10 @@
     <string name="ok_insertar_paciente">Nueva Paciente registrado</string>
     <string name="ok_actualizar_paciente">Datos actualizados</string>
     <string name="calcel_actualizar_paciente">No se actualizó datos</string>
+    <string name="title_activity_activity_atencion">ActivityAtencion</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 
 
