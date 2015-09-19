@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="grupo4.histoclici" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/doctor"
+        android:label="@string/inicio"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".ActivityInicio"
+            android:label="@string/inicio" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ActivityListaCita"
+            android:label="@string/lcita" >
+        </activity>
+        <activity
+            android:name=".ActivityCita"
+            android:label="@string/cita" >
+        </activity>
+        <activity
+            android:name=".ActivityHistoriaClinica"
+            android:label="@string/historia_clinica" >
+        </activity>
+        <activity
+            android:name=".ActivityListaPaciente"
+            android:label="@string/lpaciente" >
+        </activity>
+        <activity
+            android:name=".ActivityPaciente"
+            android:label="@string/paciente" >
+        </activity>
+    </application>
+
+</manifest>
