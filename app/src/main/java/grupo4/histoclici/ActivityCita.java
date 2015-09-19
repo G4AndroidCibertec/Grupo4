@@ -82,10 +82,6 @@ public class ActivityCita extends AppCompatActivity {
             intent.putExtra(ActivityListaCita.ARG_FECHA, getIntent().getStringExtra(ActivityListaCita.ARG_FECHA));
             setResult(RESULT_OK, intent);
         }
-        else if (item.getItemId() == R.id.a_CancelarCita){
-            Intent intent = new Intent();
-            setResult(RESULT_CANCELED, intent);
-        }
         finish();
         return true;
     }

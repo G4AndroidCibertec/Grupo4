@@ -87,11 +87,6 @@ public class ActivityPaciente extends AppCompatActivity {
             finish();
             return true;
         }
-        else if (item.getItemId() == R.id.a_CancelarPaciente) {
-            finish();
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 }

@@ -2,12 +2,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/a_CancelarHC"
-        android:icon="@drawable/cancelar"
-        android:title="@string/cancelar"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/a_NuevaAtencion"
         android:icon="@drawable/nuevaatencion2"
         android:title="@string/nueva_atencion"

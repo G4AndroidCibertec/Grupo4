@@ -4,12 +4,6 @@
     tools:context="grupo4.histoclici.ActivityPaciente">
 
     <item
-        android:id="@+id/a_CancelarPaciente"
-        android:title="@string/cancelar"
-        android:icon="@drawable/cancelar"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/a_GuardarPaciente"
         android:title="@string/paciente"
         android:icon="@drawable/guardar"

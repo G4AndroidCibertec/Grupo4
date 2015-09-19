@@ -31,21 +31,6 @@ public class ActivityListaPaciente extends AppCompatActivity implements ARVLista
         rvPaciente.setAdapter(arvListaPaciente);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_lista_paciente, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if (item.getItemId() == R.id.a_CancelarListaPaciente) {
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void ieditarPaciente(Paciente paciente) {
