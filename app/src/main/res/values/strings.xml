@@ -28,6 +28,8 @@
     <string name="ok_eliminar_cita">Cita eliminada</string>
     <string name="ok_insertar_cita">Nueva Cita registrada</string>
     <string name="validaHoraFin">Fin debe ser mayor a Inicio</string>
+    <string name="error_motivo">Ingresar motivo</string>
+    <string name="error_tratamiento">Ingresar Tratamiento</string>
 
     <string name="guardar">Guardar</string>
     <string name="cancelar">Cancelar</string>
@@ -60,7 +62,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
-
+    <string name="Motivo">Motivo de la Consulta</string>
+    <string name="Tratamiento">Tratamiento</string>
 
 
 
