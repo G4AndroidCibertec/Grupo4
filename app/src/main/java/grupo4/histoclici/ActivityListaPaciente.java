@@ -49,9 +49,38 @@ public class ActivityListaPaciente extends AppCompatActivity implements ARVLista
 
     @Override
     public void ieditarPaciente(Paciente paciente) {
+
         Intent intent = new Intent(ActivityListaPaciente.this, ActivityPaciente.class);
         intent.putExtra(ARG_PACIENTE, paciente);
         startActivityForResult(intent, REQUEST_CODE_EDITAR_PACIENTE);
+
+    }
+
+    @Override
+    public void imostrarmenu(Paciente paciente) {
+        Toast.makeText(ActivityListaPaciente.this, "LONGGGGGGGGGGGGG", Toast.LENGTH_LONG).show();
+
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        if ( item.getItemId() == R.id.s_Editar ){
+            Intent intent = new Intent(ActivityListaPaciente.this, ActivityPaciente.class);
+            intent.putExtra("MODO ACTU",2);
+            startActivityForResult(intent, REQUEST_CODE_EDITAR_PACIENTE);
+        }
+        if ( item.getItemId() == R.id.s_Ver ){
+            Intent intent = new Intent(ActivityListaPaciente.this, ActivityPaciente.class);
+            intent.putExtra("MODO VER",1);
+            startActivityForResult(intent, REQUEST_CODE_EDITAR_PACIENTE);
+        }
+        if ( item.getItemId() == R.id.s_Cancelar ){
+
+        }
+
+
+        return super.onContextItemSelected(item);
     }
 
     @Override

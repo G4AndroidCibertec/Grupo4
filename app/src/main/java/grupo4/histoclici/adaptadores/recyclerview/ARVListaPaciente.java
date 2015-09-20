@@ -1,10 +1,12 @@
 package grupo4.histoclici.adaptadores.recyclerview;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -22,6 +24,7 @@ public class ARVListaPaciente extends RecyclerView.Adapter<ARVListaPaciente.ARVL
 
     public interface ARVListaPacienteListener{
         void ieditarPaciente(Paciente paciente);
+        void imostrarmenu(Paciente paciente);
     }
 
     public ARVListaPaciente(ARVListaPacienteListener parametroARVListaCitaListener) {
@@ -64,12 +67,22 @@ public class ARVListaPaciente extends RecyclerView.Adapter<ARVListaPaciente.ARVL
 
         holder.itemView.setTag(position);
         holder.itemView.setOnClickListener(editarPaciente);
+        holder.itemView.setOnLongClickListener( itemPaciente );
     }
 
     @Override
     public int getItemCount() {
         return alPaciente.size();
     }
+
+    View.OnLongClickListener itemPaciente = new View.OnLongClickListener() {
+        @Override
+        public boolean onLongClick(View v) {
+            if(iARVListaPacienteListener != null)
+                iARVListaPacienteListener.imostrarmenu(alPaciente.get((int)v.getTag()));
+            return false;
+        }
+    };
 
     View.OnClickListener editarPaciente = new View.OnClickListener() {
         @Override
