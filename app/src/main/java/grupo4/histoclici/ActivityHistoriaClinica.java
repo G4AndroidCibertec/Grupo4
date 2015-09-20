@@ -48,10 +48,6 @@ public class ActivityHistoriaClinica extends AppCompatActivity {
         if (item.getItemId() == R.id.a_NuevaAtencion) {
             return true;
         }
-        else if (item.getItemId() == R.id.a_CancelarHC){
-            finish();
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
 }
