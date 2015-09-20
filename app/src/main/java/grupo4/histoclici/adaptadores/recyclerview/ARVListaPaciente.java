@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,13 +16,19 @@ import grupo4.histoclici.R;
 import grupo4.histoclici.dao.PacienteDAO;
 import grupo4.histoclici.entidad.Paciente;
 
-/**
- * Created by pedro_jx on 18/09/2015.
- */
-public class ARVListaPaciente extends RecyclerView.Adapter<ARVListaPaciente.ARVListaPacienteHolder> {
+public class ARVListaPaciente extends RecyclerView.Adapter<ARVListaPaciente.ARVListaPacienteHolder> implements Filterable {
 
-    private ArrayList<Paciente> alPaciente;
+    private String filtro = "";
+    private ArrayList<Paciente> alPaciente, alPacienteFiltro;
+    private ARVListaPacienteFilter arvListaPacienteFilter;
     ARVListaPacienteListener iARVListaPacienteListener;
+
+    @Override
+    public Filter getFilter() {
+        if (arvListaPacienteFilter == null)
+            arvListaPacienteFilter = new ARVListaPacienteFilter();
+        return arvListaPacienteFilter;
+    }
 
     public interface ARVListaPacienteListener{
         void ieditarPaciente(Paciente paciente);
@@ -55,7 +63,9 @@ public class ARVListaPaciente extends RecyclerView.Adapter<ARVListaPaciente.ARVL
 
     @Override
     public void onBindViewHolder(ARVListaPacienteHolder holder, int position) {
-        Paciente paciente = alPaciente.get(position);
+        //Paciente paciente = alPaciente.get(position);
+        Paciente paciente = alPacienteFiltro.get(position);
+
         holder.itvIdPaciente.setText(String.valueOf(paciente.getidPaciente()));
         holder.itvPaciente.setText(paciente.getPaciente());
         holder.itvGenero.setText(paciente.getGenero());
@@ -67,19 +77,21 @@ public class ARVListaPaciente extends RecyclerView.Adapter<ARVListaPaciente.ARVL
 
         holder.itemView.setTag(position);
         holder.itemView.setOnClickListener(editarPaciente);
-        holder.itemView.setOnLongClickListener( itemPaciente );
+        holder.itemView.setOnLongClickListener(itemPaciente );
     }
 
     @Override
     public int getItemCount() {
-        return alPaciente.size();
+        //return alPaciente.size();
+        return alPacienteFiltro.size();
     }
 
     View.OnLongClickListener itemPaciente = new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View v) {
             if(iARVListaPacienteListener != null)
-                iARVListaPacienteListener.imostrarmenu(alPaciente.get((int)v.getTag()));
+                //iARVListaPacienteListener.imostrarmenu(alPaciente.get((int)v.getTag()));
+                iARVListaPacienteListener.imostrarmenu(alPacienteFiltro.get((int)v.getTag()));
             return false;
         }
     };
@@ -88,13 +100,64 @@ public class ARVListaPaciente extends RecyclerView.Adapter<ARVListaPaciente.ARVL
         @Override
         public void onClick(View v) {
             if(iARVListaPacienteListener != null)
-                iARVListaPacienteListener.ieditarPaciente(alPaciente.get((int)v.getTag()));
+                //iARVListaPacienteListener.ieditarPaciente(alPaciente.get((int)v.getTag()));
+                iARVListaPacienteListener.ieditarPaciente(alPacienteFiltro.get((int)v.getTag()));
         }
     };
 
     public void listarPaciente(){
         alPaciente = new ArrayList<>();
+        alPacienteFiltro = new ArrayList<>();
         alPaciente.addAll(new PacienteDAO().listarPacientes());
+        alPacienteFiltro.addAll(alPaciente);
         notifyDataSetChanged();
     }
+
+    class ARVListaPacienteFilter extends Filter {
+
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            filtro = charSequence == null ? "" : charSequence.toString();
+            FilterResults filterResults = new FilterResults();
+
+            if (filtro.isEmpty()) {
+                filterResults.values = alPaciente;
+                filterResults.count = alPaciente.size();
+            } else {
+                String[] sFilters = filtro.toUpperCase().split(" ");
+                boolean isContains = false;
+
+                ArrayList<Paciente> alPacienteNueva = new ArrayList<>();
+
+                for (int i = 0; i < alPaciente.size(); i++) {
+                    isContains = false;
+                    Paciente paciente = alPaciente.get(i);
+
+                    for (int j = 0; j < sFilters.length; j++) {
+                        if (paciente.getPaciente().toUpperCase().contains(sFilters[j])) {
+                            isContains = true;
+                            break;
+                        }
+                    }
+
+                    if (isContains)
+                        alPacienteNueva.add(paciente);
+                }
+
+                filterResults.values = alPacienteNueva;
+                filterResults.count = alPacienteNueva.size();
+            }
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            if (filterResults != null) {
+                alPacienteFiltro.clear();
+                alPacienteFiltro.addAll((ArrayList<Paciente>) filterResults.values);
+                notifyDataSetChanged();
+            }
+        }
+    }
+
 }
