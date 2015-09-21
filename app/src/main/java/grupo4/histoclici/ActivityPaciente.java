@@ -11,13 +11,23 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolygonOptions;
+
 import grupo4.histoclici.dao.PacienteDAO;
 import grupo4.histoclici.entidad.Paciente;
 
-public class ActivityPaciente extends AppCompatActivity {
+public class ActivityPaciente extends AppCompatActivity implements OnMapReadyCallback {
     TextView tvIdPaciente;
     EditText etPaciente, etTelefono, etCelular, etDomicilio;
     RadioButton rbF, rbM;
+    private SupportMapFragment mSupportMapFragment;
+    private GoogleMap mGoogleMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +40,8 @@ public class ActivityPaciente extends AppCompatActivity {
         etTelefono = (EditText)findViewById(R.id.etTelefono);
         etCelular = (EditText)findViewById(R.id.etCelular);
         etDomicilio = (EditText)findViewById(R.id.etDomicilio);
+        mSupportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mSupportMapFragment.getMapAsync(ActivityPaciente.this);
 
         if(getIntent().getExtras() != null){
             Paciente paciente = getIntent().getParcelableExtra(ActivityListaPaciente.ARG_PACIENTE);
@@ -90,5 +102,19 @@ public class ActivityPaciente extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mGoogleMap = googleMap;
+        mGoogleMap.addMarker(new MarkerOptions()
+                .position(new LatLng(-12.086542, -77.048923))
+                .title("Marker").draggable(true));
+//        mGoogleMap.addPolyline(new PolylineOptions().add(new LatLng(-12.086279, -77.049621)).add(new LatLng(-12.085272, -77.048655)).add(new LatLng(-12.088231, -77.048162)).add(new LatLng(-12.088367, -77.049299)).color(0xFFFF0033));
+        mGoogleMap.addPolygon(new PolygonOptions().add(new LatLng(-12.086279, -77.049621)).add(new LatLng(-12.085272, -77.048655)).add(new LatLng(-12.088231, -77.048162)).add(new LatLng(-12.088367, -77.049299)).strokeColor(0xFFFF0033));
+//        mGoogleMap.setMyLocationEnabled(true);
+//        mGoogleMap.getUiSettings().setMyLocationButtonEnabled(true);
+        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(-12.086542, -77.048923)));
+        mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
     }
 }

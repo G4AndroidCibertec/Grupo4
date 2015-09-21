@@ -7,9 +7,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -66,7 +68,7 @@ public class ActivityListaPaciente extends AppCompatActivity implements ARVLista
 
     @Override
     public void imostrarmenu(Paciente paciente) {
-        Toast.makeText(ActivityListaPaciente.this, "LONGGGGGGGGGGGGG", Toast.LENGTH_LONG).show();
+        //Toast.makeText(ActivityListaPaciente.this, "LONGGGGGGGGGGGGG", Toast.LENGTH_LONG).show();
 
     }
 

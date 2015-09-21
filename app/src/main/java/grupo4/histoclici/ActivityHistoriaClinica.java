@@ -1,5 +1,6 @@
 package grupo4.histoclici;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,8 +15,13 @@ public class ActivityHistoriaClinica extends AppCompatActivity {
 
     private ARVHistoriaClinica arvHistoriaClinica;
 
+    public final static String ARG_IDPACIENTE = "ARG_IDPACIENTE";
+    public final static String ARG_PACIENTE = "ARG_PACIENTE";
+    private final static int REQUEST_CODE = 1;
+
     TextView tvPacienteHC, tvIdPacienteHC;
     RecyclerView rvHistoriaClinica;
+    private int m_idPaciente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +40,8 @@ public class ActivityHistoriaClinica extends AppCompatActivity {
 
         arvHistoriaClinica = new ARVHistoriaClinica(getIntent().getIntExtra(ActivityListaCita.ARG_IDPACIENTE, 0));
         rvHistoriaClinica.setAdapter(arvHistoriaClinica);
+
+        m_idPaciente = getIntent().getIntExtra( ActivityListaCita.ARG_IDPACIENTE, 0 );
     }
 
     @Override
@@ -44,8 +52,23 @@ public class ActivityHistoriaClinica extends AppCompatActivity {
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (  requestCode == REQUEST_CODE && resultCode == RESULT_OK ){
+            arvHistoriaClinica = new ARVHistoriaClinica(getIntent().getIntExtra(ActivityListaCita.ARG_IDPACIENTE, 0));
+            rvHistoriaClinica.setAdapter(arvHistoriaClinica);
+        }
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         if (item.getItemId() == R.id.a_NuevaAtencion) {
+            Intent intent = new Intent( ActivityHistoriaClinica.this, ActivityAtencion.class  );
+            intent.putExtra( ARG_IDPACIENTE, m_idPaciente );
+            intent.putExtra( ARG_PACIENTE, getIntent().getStringExtra(ActivityListaCita.ARG_PACIENTE) );
+            startActivityForResult(intent, REQUEST_CODE);
             return true;
         }
         return super.onOptionsItemSelected(item);

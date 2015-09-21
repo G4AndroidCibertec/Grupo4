@@ -1,5 +1,6 @@
 package grupo4.histoclici.dao;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 
 import java.util.ArrayList;
@@ -40,6 +41,20 @@ public class AtencionDAO {
                 cursor.close();
         }
         return alAtencion;
+    }
+
+    public void insertarAtencion(Atencion atencion){
+        try{
+            ContentValues cv = new ContentValues();
+            cv.put("IdPaciente",atencion.getIdPaciente());
+            cv.put("FechaAtencion",atencion.getFechaAtencion());
+            cv.put("Motivo",atencion.getMotivo());
+            cv.put("Tratamiento",atencion.getTratamiento());
+            DataBaseHelper.myDataBase.insert("Atencion",null,cv);
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+        }
     }
 
 }
