@@ -99,14 +99,6 @@ public class ActivityListaCita extends AppCompatActivity implements ARVListaCita
         dpFechaCita = (DatePicker) findViewById(R.id.dpFechaCita);
         dpFechaCita.init(fecha.get(Calendar.YEAR), fecha.get(Calendar.MONTH), fecha.get(Calendar.DATE), seleccionarFecha);
 
-       /* try {
-            dataBaseHelper = new DataBaseHelper(ActivityListaCita.this);
-            dataBaseHelper.createDataBase();
-            dataBaseHelper.openDataBase();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }*/
-
         String fechaOnCreate = String.format("%02d/%02d/%s", fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH) + 1), fecha.get(Calendar.YEAR));
         arvListaCita = new ARVListaCita(ActivityListaCita.this, fechaOnCreate);
         rvCita.setAdapter(arvListaCita);
@@ -127,8 +119,8 @@ public class ActivityListaCita extends AppCompatActivity implements ARVListaCita
 
             if (actividad.equals("Nueva Cita")) {
                 Intent i = new Intent(ActivityListaCita.this, ActivityCita.class);
-                i.putExtra(ARG_FECHA, String.format("%02d/%02d/%d", dpFechaCita.getDayOfMonth(), (dpFechaCita.getMonth() + 1), dpFechaCita.getYear()));
                 startActivityForResult(i, REQUEST_CODE_INSERTAR_CITA);
+                dlMenu.closeDrawer(Gravity.START);
             } else if (actividad.equals("Cerrar Sesión")) {
                 Toast.makeText(ActivityListaCita.this, ((TextView) v).getText(), Toast.LENGTH_SHORT).show();
                 finish();
@@ -140,12 +132,8 @@ public class ActivityListaCita extends AppCompatActivity implements ARVListaCita
             }
             else if(actividad.equals("Nuevo Paciente")){
                 Intent i = new Intent(ActivityListaCita.this, ActivityPaciente.class);
-                dlMenu.closeDrawer(Gravity.START);
                 startActivity(i);
             }
-
-
-
         }
     };
 
@@ -162,6 +150,8 @@ public class ActivityListaCita extends AppCompatActivity implements ARVListaCita
     public void ieliminarCita(final Cita cita, final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(ActivityListaCita.this);
         builder.setCancelable(false);
+        builder.setTitle("Eliminar");
+        builder.setIcon(R.drawable.eliminar);
         builder.setMessage(String.format("¿Eliminar la cita de %s el día %s de %s a %s", cita.getPaciente(), cita.getFechaCita(), cita.getInicio(), cita.getFin()));
         builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
             @Override

@@ -17,17 +17,15 @@
     <string name="cita">Cita</string>
     <string name="hora_inicio">Inicio</string>
     <string name="hora_fin">Fin</string>
-    <string name="pregunta">¿Visita a domilio?</string>
+    <string name="pregunta">¿Visita a domicilio?</string>
 
     <string name="lcita">Lista de citas</string>
     <string name="verHC">Historia clínica</string>
 
-    <string name="error_fecha">Ingresar fecha: dd/mm/aaaa</string>
-    <string name="error_hora">Ingresar hora: hh:00pm</string>
-    <string name="error_hora_fin">Fin debe ser mayor a Inicio</string>
+    <string name="error_fecha">Selecciona la fecha</string>
+    <string name="error_hora">Selecciona la hora</string>
     <string name="ok_eliminar_cita">Cita eliminada</string>
-    <string name="ok_insertar_cita">Nueva Cita registrada</string>
-    <string name="validaHoraFin">Fin debe ser mayor a Inicio</string>
+    <string name="ok_insertar_cita">Nueva cita registrada</string>
 
     <string name="guardar">Guardar</string>
     <string name="cancelar">Cancelar</string>
@@ -52,7 +50,7 @@
     <string name="domicilio">Domicilio</string>
     <string name="error_paciente">Ingresa nombre y apellidos</string>
     <string name="error_genero">Selecciona el género</string>
-    <string name="ok_insertar_paciente">Nueva Paciente registrado</string>
+    <string name="ok_insertar_paciente">Nuevo paciente registrado</string>
     <string name="ok_actualizar_paciente">Datos actualizados</string>
     <string name="calcel_actualizar_paciente">No se actualizó datos</string>
     <string name="title_activity_activity_atencion">ActivityAtencion</string>

@@ -1,15 +1,24 @@
 package grupo4.histoclici;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import java.util.Calendar;
+import java.util.Timer;
 
 import grupo4.histoclici.adaptadores.spinner.ASPaciente;
 import grupo4.histoclici.dao.CitaDAO;
@@ -22,9 +31,10 @@ public class ActivityCita extends AppCompatActivity {
     private ASPaciente asPaciente;
 
     private Spinner sPaciente;
-    private EditText etFechaCita;
-    private TimePicker tpInicio, tpFin;
+    private TextView tvFechaCita, tvInicio, tvFin;
+    private ImageButton ibFechaCita, ibInicio, ibFin;
     private CheckBox chDomicilio;
+    private Calendar calendario = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,15 +43,69 @@ public class ActivityCita extends AppCompatActivity {
         setContentView(R.layout.cita);
 
         sPaciente = (Spinner) findViewById(R.id.sPaciente);
-        etFechaCita = (EditText) findViewById(R.id.etFechaCita);
-        tpInicio = (TimePicker) findViewById(R.id.tpInicio);
-        tpFin = (TimePicker) findViewById(R.id.tpFin);
+        ibFechaCita = (ImageButton) findViewById(R.id.ibFechaCita);
+        tvFechaCita = (TextView) findViewById(R.id.tvFechaCita);
+        ibInicio = (ImageButton) findViewById(R.id.ibInicio);
+        tvInicio = (TextView) findViewById(R.id.tvInicio);
+        ibFin = (ImageButton) findViewById(R.id.ibFin);
+        tvFin = (TextView) findViewById(R.id.tvFin);
         chDomicilio = (CheckBox) findViewById(R.id.chDomicilio);
+
+        tvFechaCita.setOnClickListener(mostrarDialogoFecha);
+        ibFechaCita.setOnClickListener(mostrarDialogoFecha);
+
+        tvInicio.setOnClickListener(mostrarDialogoHoraInicio);
+        ibInicio.setOnClickListener(mostrarDialogoHoraInicio);
+        tvFin.setOnClickListener(mostrarDialogoHoraFin);
+        ibFin.setOnClickListener(mostrarDialogoHoraFin);
 
         asPaciente = new ASPaciente(ActivityCita.this, new CitaDAO().listarPaciente());
         sPaciente.setAdapter(asPaciente);
-        etFechaCita.setText(getIntent().getStringExtra(ActivityListaCita.ARG_FECHA));
     }
+
+    View.OnClickListener mostrarDialogoFecha = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            new DatePickerDialog(ActivityCita.this, ponFecha, calendario.get(Calendar.YEAR), calendario.get(Calendar.MONTH), calendario.get(Calendar.DAY_OF_MONTH)).show();
+        }
+    };
+
+    DatePickerDialog.OnDateSetListener ponFecha = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int ano, int mes, int dia) {
+            tvFechaCita.setText(String.format("%02d/%02d/%d", dia, mes+1, ano));
+        }
+    };
+
+    View.OnClickListener mostrarDialogoHoraInicio = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            new TimePickerDialog(ActivityCita.this, ponHoraInicio, calendario.get(calendario.HOUR), 0, true).show();
+        }
+    };
+
+    TimePickerDialog.OnTimeSetListener ponHoraInicio = new TimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker view, int hora, int minuto) {
+            tvInicio.setText(String.format("%02d:%02d", hora, minuto));
+            tvFin.setText(String.format("%02d:%02d", hora + 1, minuto));
+        }
+    };
+
+    View.OnClickListener mostrarDialogoHoraFin = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            new TimePickerDialog(ActivityCita.this, ponHoraFin, calendario.get(calendario.HOUR), 0, true).show();
+        }
+    };
+
+    TimePickerDialog.OnTimeSetListener ponHoraFin = new TimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker view, int hora, int minuto) {
+            tvInicio.setText(String.format("%02d:%02d", hora - 1, minuto));
+            tvFin.setText(String.format("%02d:%02d", hora, minuto));
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -53,25 +117,19 @@ public class ActivityCita extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if (item.getItemId() == R.id.a_GuardaCita) {
-            if (etFechaCita.getText().toString().trim().length() < 10) {
-                etFechaCita.getText().clear();
-                etFechaCita.setHint(R.string.error_fecha);
+            if (tvFechaCita.getText().toString().trim().length() == 0) {
+                tvFechaCita.setHint(R.string.error_fecha);
                 return false;
-            }
-
-            if(tpInicio.getCurrentHour() > tpFin.getCurrentHour()) {
-                Toast.makeText(ActivityCita.this, R.string.validaHoraFin, Toast.LENGTH_SHORT).show();
-                return false;
-            }else if(tpInicio.getCurrentHour() == tpFin.getCurrentHour() && tpInicio.getCurrentMinute() >= tpFin.getCurrentMinute()){
-                Toast.makeText(ActivityCita.this, R.string.validaHoraFin, Toast.LENGTH_SHORT).show();
+            } else if (tvInicio.getText().toString().trim().length() == 0) {
+                tvInicio.setHint(R.string.error_hora);
                 return false;
             }
 
             Cita cita = new Cita();
             cita.setIdPaciente(((Paciente) sPaciente.getSelectedItem()).getidPaciente());
-            cita.setFechaCita(etFechaCita.getText().toString().trim());
-            cita.setInicio(String.format("%02d:%02d",tpInicio.getCurrentHour(),tpInicio.getCurrentMinute()));
-            cita.setFin(String.format("%02d:%02d",tpFin.getCurrentHour(),tpFin.getCurrentMinute()));
+            cita.setFechaCita(tvFechaCita.getText().toString().trim());
+            cita.setInicio(tvInicio.getText().toString().trim());
+            cita.setFin(tvFin.getText().toString().trim());
             if (!chDomicilio.isChecked())
                 cita.setPregunta("N");
             else
@@ -79,7 +137,7 @@ public class ActivityCita extends AppCompatActivity {
 
             new CitaDAO().insertarCita(cita);
             Intent intent = new Intent();
-            intent.putExtra(ActivityListaCita.ARG_FECHA, getIntent().getStringExtra(ActivityListaCita.ARG_FECHA));
+            intent.putExtra(ActivityListaCita.ARG_FECHA, tvFechaCita.getText().toString().trim());
             setResult(RESULT_OK, intent);
         }
         finish();

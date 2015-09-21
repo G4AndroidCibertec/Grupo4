@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/usuario"
+        android:textColorHint="@color/naranja"
         android:singleLine="true"/>
 
     <EditText
@@ -17,6 +18,7 @@
         android:layout_below="@id/etUsuario"
         android:layout_marginTop="@dimen/margen"
         android:hint="@string/clave"
+        android:textColorHint="@color/naranja"
         android:inputType="textPassword"
         android:singleLine="true"/>
 

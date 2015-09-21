@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,7 +57,8 @@ public class ActivityPaciente extends AppCompatActivity {
         if (item.getItemId() == R.id.a_GuardarPaciente) {
 
             if(etPaciente.getText().toString().length() == 0) {
-                Toast.makeText(ActivityPaciente.this, R.string.error_paciente, Toast.LENGTH_SHORT).show();
+                etPaciente.getText().clear();
+                etPaciente.setHint(R.string.error_paciente);
                 return false;
             }
             if(!rbF.isChecked() && !rbM.isChecked()){
