@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import grupo4.histoclici.entidad.Cita;
 import grupo4.histoclici.entidad.Paciente;
 
-/**
- * Created by pedro_jx on 07/09/2015.
- */
 public class CitaDAO {
 
     String[] valores;
@@ -85,7 +82,8 @@ public class CitaDAO {
             cv.put("Fin", cita.getFin());
             cv.put("fg_domicilio", cita.getPregunta());
             DataBaseHelper.myDataBase.insert("Cita", null, cv);
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             ex.printStackTrace();
         }
     }
