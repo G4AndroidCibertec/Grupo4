@@ -58,14 +58,16 @@
     <string name="ok_actualizar_paciente">Datos actualizados</string>
     <string name="calcel_actualizar_paciente">No se actualizó datos</string>
     <string name="title_activity_activity_atencion">ActivityAtencion</string>
+    <string name="error_telefono">Ingrese correctamente el telefono</string>
+    <string name="error_celular">Ingrese correctamente el celular</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+
+    <string name="hello_world">Hello world!</string>    
 
     <string name="Motivo">Motivo de la Consulta</string>
     <string name="Tratamiento">Tratamiento</string>
-    <string name="Gps">Ubicacion GPS</string>
-
-
+    <string name="Gps">Ubicación GPS</string>
+    
+    <string name="action_settings">Settings</string>
 
 </resources>
