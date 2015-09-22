@@ -4,17 +4,10 @@
     android:layout_margin="@dimen/margen"
     android:orientation="vertical">
 
-    <CheckBox
-        android:id="@+id/chDomicilio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="@string/pregunta" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margen"
         android:orientation="horizontal">
 
         <TextView
@@ -34,6 +27,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margen"
         android:orientation="horizontal">
 
         <TextView
@@ -42,20 +36,26 @@
             android:layout_weight="1"
             android:text="@string/fecha" />
 
-        <EditText
-            android:id="@+id/etFechaCita"
+        <TextView
+            android:id="@+id/tvFechaCita"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:inputType="date"
-            android:maxLength="10"
-            android:singleLine="true" />
+            android:textColorHint="@color/naranja" />
+
+        <ImageButton
+            android:id="@+id/ibFechaCita"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/gris200"
+            android:src="@drawable/fecha" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margen"
         android:orientation="horizontal">
 
         <TextView
@@ -64,20 +64,26 @@
             android:layout_weight="1"
             android:text="@string/hora_inicio" />
 
-        <TimePicker
-            android:id="@+id/tpInicio"
+        <TextView
+            android:id="@+id/tvInicio"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textColorHint="@color/naranja" />
+
+        <ImageButton
+            android:id="@+id/ibInicio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleX="0.75"
-            android:scaleY="0.75"
-            />
-
+            android:background="@color/gris200"
+            android:src="@drawable/inicio" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margen"
         android:orientation="horizontal">
 
         <TextView
@@ -86,17 +92,28 @@
             android:layout_weight="1"
             android:text="@string/hora_fin" />
 
-        <TimePicker
-            android:id="@+id/tpFin"
+        <TextView
+            android:id="@+id/tvFin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2" />
+
+        <ImageButton
+            android:id="@+id/ibFin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleX="0.75"
-            android:scaleY="0.75"/>
+            android:background="@color/gris200"
+            android:src="@drawable/fin" />
 
     </LinearLayout>
 
-
-
+    <CheckBox
+        android:id="@+id/chDomicilio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/pregunta" />
 
 
 </LinearLayout>

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -107,7 +108,8 @@ public class ActivityPaciente extends AppCompatActivity implements OnMapReadyCal
         if (item.getItemId() == R.id.a_GuardarPaciente) {
 
             if(etPaciente.getText().toString().length() == 0) {
-                Toast.makeText(ActivityPaciente.this, R.string.error_paciente, Toast.LENGTH_SHORT).show();
+                etPaciente.getText().clear();
+                etPaciente.setHint(R.string.error_paciente);
                 return false;
             }
             if(!rbF.isChecked() && !rbM.isChecked()){

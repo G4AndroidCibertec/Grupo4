@@ -7,9 +7,6 @@ import java.util.ArrayList;
 
 import grupo4.histoclici.entidad.Atencion;
 
-/**
- * Created by pedro_jx on 18/09/2015.
- */
 public class AtencionDAO {
 
 
