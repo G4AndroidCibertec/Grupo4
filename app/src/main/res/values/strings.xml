@@ -54,6 +54,8 @@
     <string name="domicilio">Domicilio</string>
     <string name="error_paciente">Ingresa nombre y apellidos</string>
     <string name="error_genero">Selecciona el género</string>
+    <string name="error_telefono">Ingrese el numero de telefono correcto</string>
+    <string name="error_celular">Ingrese el numero de celular correcto</string>
     <string name="ok_insertar_paciente">Nueva Paciente registrado</string>
     <string name="ok_actualizar_paciente">Datos actualizados</string>
     <string name="calcel_actualizar_paciente">No se actualizó datos</string>

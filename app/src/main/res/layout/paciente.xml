@@ -142,10 +142,33 @@
         android:padding="10dp"
         >
 
-        <TextView
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Gps" />
+            android:layout_marginRight="15dp"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="@string/Gps"
+
+                />
+
+            <Button
+                android:id="@+id/bt_Gps"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:minWidth="10dp"
+                android:background="@drawable/gps" />
+
+        </LinearLayout>
+
+
 
         <fragment android:name="com.google.android.gms.maps.SupportMapFragment"
             android:id="@+id/map"

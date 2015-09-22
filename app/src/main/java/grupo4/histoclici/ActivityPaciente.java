@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -18,6 +20,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolygonOptions;
 
+import grupo4.histoclici.Utils.GPSTracker;
 import grupo4.histoclici.dao.PacienteDAO;
 import grupo4.histoclici.entidad.Paciente;
 
@@ -25,8 +28,13 @@ public class ActivityPaciente extends AppCompatActivity implements OnMapReadyCal
     TextView tvIdPaciente;
     EditText etPaciente, etTelefono, etCelular, etDomicilio;
     RadioButton rbF, rbM;
+    Button btGps;
     private SupportMapFragment mSupportMapFragment;
     private GoogleMap mGoogleMap;
+    private int m_idPaciente;
+    private double m_latitud = 0;
+    private double m_longitud = 0;
+    GPSTracker gps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +47,14 @@ public class ActivityPaciente extends AppCompatActivity implements OnMapReadyCal
         etTelefono = (EditText)findViewById(R.id.etTelefono);
         etCelular = (EditText)findViewById(R.id.etCelular);
         etDomicilio = (EditText)findViewById(R.id.etDomicilio);
-        mSupportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        mSupportMapFragment.getMapAsync(ActivityPaciente.this);
+
+        btGps = (Button)findViewById(R.id.bt_Gps);
+        btGps.setOnClickListener(btGpsOnClickListener);
 
         if(getIntent().getExtras() != null){
             Paciente paciente = getIntent().getParcelableExtra(ActivityListaPaciente.ARG_PACIENTE);
             tvIdPaciente.setText(String.valueOf(paciente.getidPaciente()));
+            m_idPaciente = Integer.parseInt( String.valueOf(paciente.getidPaciente()) );
             etPaciente.setText(paciente.getPaciente());
             if(paciente.getGenero().equals("F"))
                 rbF.setChecked(true);
@@ -53,8 +63,37 @@ public class ActivityPaciente extends AppCompatActivity implements OnMapReadyCal
             etTelefono.setText(paciente.getTelefono());
             etCelular.setText(paciente.getCelular());
             etDomicilio.setText(paciente.getDomicilio());
+            m_latitud = Double.parseDouble( paciente.getLatitud() );
+            m_longitud = Double.parseDouble( paciente.getAltitud() );
         }
+        else
+            m_idPaciente = 0;
+
+        mSupportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mSupportMapFragment.getMapAsync(ActivityPaciente.this);
+
     }
+
+    View.OnClickListener btGpsOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            gps = new GPSTracker( ActivityPaciente.this );
+            // check if GPS enabled
+            if(gps.canGetLocation()){
+                m_latitud = gps.getLatitude();
+                m_longitud = gps.getLongitude();
+            }
+            else{
+                gps.showSettingsAlert();
+            }
+
+            Toast.makeText(ActivityPaciente.this,"Ubicación GPS", Toast.LENGTH_LONG).show();
+            mSupportMapFragment.getMapAsync(ActivityPaciente.this);
+
+
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -76,6 +115,16 @@ public class ActivityPaciente extends AppCompatActivity implements OnMapReadyCal
                 return false;
             }
 
+            if ( etTelefono.getText().toString().length() == 0 || etTelefono.getText().toString().length() < 7 ){
+                Toast.makeText(ActivityPaciente.this, R.string.error_telefono, Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+            if ( etCelular.getText().toString().length() == 0 || etCelular.getText().toString().length() < 9 ){
+                Toast.makeText(ActivityPaciente.this, R.string.error_celular, Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
             Paciente paciente = new Paciente();
             paciente.setPaciente(etPaciente.getText().toString().trim());
             if(rbF.isChecked())
@@ -85,6 +134,8 @@ public class ActivityPaciente extends AppCompatActivity implements OnMapReadyCal
             paciente.setTelefono(etTelefono.getText().toString().trim());
             paciente.setCelular(etCelular.getText().toString().trim());
             paciente.setDomicilio(etDomicilio.getText().toString().trim());
+            paciente.setLatitud( String.valueOf( m_latitud ) );
+            paciente.setAltitud( String.valueOf( m_longitud ) );
 
             if(getIntent().getExtras() == null) {
                 new PacienteDAO().insertarPaciente(paciente);
@@ -105,14 +156,18 @@ public class ActivityPaciente extends AppCompatActivity implements OnMapReadyCal
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
-        mGoogleMap.addMarker(new MarkerOptions()
-                .position(new LatLng(-12.086542, -77.048923))
-                .title("Marker").draggable(true));
-//        mGoogleMap.addPolyline(new PolylineOptions().add(new LatLng(-12.086279, -77.049621)).add(new LatLng(-12.085272, -77.048655)).add(new LatLng(-12.088231, -77.048162)).add(new LatLng(-12.088367, -77.049299)).color(0xFFFF0033));
-        mGoogleMap.addPolygon(new PolygonOptions().add(new LatLng(-12.086279, -77.049621)).add(new LatLng(-12.085272, -77.048655)).add(new LatLng(-12.088231, -77.048162)).add(new LatLng(-12.088367, -77.049299)).strokeColor(0xFFFF0033));
-//        mGoogleMap.setMyLocationEnabled(true);
-//        mGoogleMap.getUiSettings().setMyLocationButtonEnabled(true);
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(-12.086542, -77.048923)));
+        mGoogleMap.clear();
+        if (m_latitud != 0){
+            mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(m_latitud, m_longitud)).title("Ubicación").draggable(true));
+            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(m_latitud, m_longitud)));
+        }
+        else
+            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(-12.050809, -77.034886))); //LIMA,PERU
+
         mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
     }
+
+
+
+
 }

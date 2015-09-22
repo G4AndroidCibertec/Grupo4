@@ -27,7 +27,9 @@ public class PacienteDAO {
                     paciente.setCelular(cursor.getString(cursor.getColumnIndex("Celular")));
                     paciente.setDomicilio(cursor.getString(cursor.getColumnIndex("Domicilio")));
                     paciente.setLatitud(cursor.getString(cursor.getColumnIndex("Latitud")));
+                    //paciente.setLatitud(cursor.isNull(cursor.getString(cursor.getColumnIndex("Latitud"))) ? "" : cursor.getString(cursor.getColumnIndex("Latitud")));
                     paciente.setAltitud(cursor.getString(cursor.getColumnIndex("Altitud")));
+                    //paciente.setAltitud(cursor.isNull(cursor.getInt(cursor.getColumnIndex("Altitud"))) ? "" : cursor.getString(cursor.getColumnIndex("Altitud")));
                     alPaciente.add(paciente);
                 }
                 while (cursor.moveToNext());

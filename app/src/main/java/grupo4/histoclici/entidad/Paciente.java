@@ -69,7 +69,7 @@ public class Paciente implements Parcelable {
     }
 
     public void setLatitud(String latitud) {
-        latitud = latitud;
+        this.latitud = latitud;
     }
 
     public String getAltitud() {
@@ -77,7 +77,7 @@ public class Paciente implements Parcelable {
     }
 
     public void setAltitud(String altitud) {
-        altitud = altitud;
+        this.altitud = altitud;
     }
 
     public Paciente(int idPaciente, String paciente, String genero, String telefono, String celular, String domicilio, String latitud, String altitud) {
