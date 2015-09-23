@@ -60,6 +60,8 @@
     <string name="title_activity_activity_atencion">ActivityAtencion</string>
     <string name="error_telefono">Ingrese correctamente el telefono</string>
     <string name="error_celular">Ingrese correctamente el celular</string>
+    <string name="error_domicilio">Ingrese domicilio</string>
+    <string name="error_paciente_cita">Debe seleccionar un Paciente</string>
 
 
     <string name="hello_world">Hello world!</string>    
@@ -67,6 +69,8 @@
     <string name="Motivo">Motivo de la Consulta</string>
     <string name="Tratamiento">Tratamiento</string>
     <string name="Gps">Ubicación GPS</string>
+    <string name="error_fecha_atencion">Ingresar fecha de atencion</string>
+    <string name="app_version">1.0.0</string>
     
     <string name="action_settings">Settings</string>
 

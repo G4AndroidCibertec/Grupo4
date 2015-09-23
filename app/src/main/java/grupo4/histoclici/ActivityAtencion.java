@@ -98,7 +98,7 @@ public class ActivityAtencion extends AppCompatActivity {
 
             if (m_etFecha.getText().toString().trim().length() < 10) {
                 m_etFecha.getText().clear();
-                m_etFecha.setHint(R.string.error_fecha);
+                m_etFecha.setHint(R.string.error_fecha_atencion);
                 return false;
             }
             else if ( m_etMotivo.getText().toString().trim().length() <= 0 ){

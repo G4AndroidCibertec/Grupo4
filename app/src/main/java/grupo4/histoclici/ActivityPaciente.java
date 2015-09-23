@@ -127,6 +127,11 @@ public class ActivityPaciente extends AppCompatActivity implements OnMapReadyCal
                 return false;
             }
 
+            if ( etDomicilio.getText().toString().length() < 5 ){
+                Toast.makeText(ActivityPaciente.this, R.string.error_domicilio, Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
             Paciente paciente = new Paciente();
             paciente.setPaciente(etPaciente.getText().toString().trim());
             if(rbF.isChecked())

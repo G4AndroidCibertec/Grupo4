@@ -132,6 +132,7 @@ public class ActivityListaCita extends AppCompatActivity implements ARVListaCita
             }
             else if(actividad.equals("Nuevo Paciente")){
                 Intent i = new Intent(ActivityListaCita.this, ActivityPaciente.class);
+                dlMenu.closeDrawer(Gravity.START);
                 startActivity(i);
             }
         }

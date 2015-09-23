@@ -117,7 +117,11 @@ public class ActivityCita extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if (item.getItemId() == R.id.a_GuardaCita) {
-            if (tvFechaCita.getText().toString().trim().length() == 0) {
+            if ( sPaciente.getSelectedItemId() == -1 || sPaciente.getSelectedItemPosition() == -1  ) {
+                Toast.makeText(ActivityCita.this, R.string.error_paciente_cita, Toast.LENGTH_LONG).show();
+                return false;
+            }
+            else if (tvFechaCita.getText().toString().trim().length() == 0) {
                 tvFechaCita.setHint(R.string.error_fecha);
                 return false;
             } else if (tvInicio.getText().toString().trim().length() == 0) {
