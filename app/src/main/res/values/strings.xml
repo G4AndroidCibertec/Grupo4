@@ -39,7 +39,7 @@
 
 
     <string name="historia_clinica">Historia Clínica</string>
-    <string name="ifechaAtencion">Fecha de Atención</string>
+    <string name="ifecha_atencion">Fecha de Atencion</string>
     <string name="imotivo">Motivo de la consulta:</string>
     <string name="itratamiento">Tratamiento:</string>
     <string name="nueva_atencion">Nueva Atención</string>
