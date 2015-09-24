@@ -17,10 +17,10 @@
     <string name="cita">Cita</string>
     <string name="hora_inicio">Inicio</string>
     <string name="hora_fin">Fin</string>
-    <string name="pregunta">¿Visita a domilio?</string>
+    <string name="pregunta">¿Visita a domicilio?</string>
 
-    <string name="lcita">Lista de citas</string>
-    <string name="verHC">Historia clínica</string>
+    <string name="lcita">Lista de Citas</string>
+    <string name="verHC">Historia Clínica</string>
 
     <string name="error_fecha">Ingresar fecha: dd/mm/aaaa</string>
     <string name="error_hora">Ingresar hora: hh:00pm</string>
@@ -38,8 +38,8 @@
     <string name="error_clave">Ingresa clave</string>
 
 
-    <string name="historia_clinica">Historia clínica</string>
-    <string name="ifechaAtencion">Fecha de atención</string>
+    <string name="historia_clinica">Historia Clínica</string>
+    <string name="ifechaAtencion">Fecha de Atención</string>
     <string name="imotivo">Motivo de la consulta:</string>
     <string name="itratamiento">Tratamiento:</string>
     <string name="nueva_atencion">Nueva Atención</string>
