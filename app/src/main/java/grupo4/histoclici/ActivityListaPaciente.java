@@ -103,5 +103,6 @@ public class ActivityListaPaciente extends AppCompatActivity implements ARVLista
         else{
             Toast.makeText(ActivityListaPaciente.this, R.string.calcel_actualizar_paciente, Toast.LENGTH_SHORT).show();
         }
+        etPacienteFiltro.setText("");
     }
 }

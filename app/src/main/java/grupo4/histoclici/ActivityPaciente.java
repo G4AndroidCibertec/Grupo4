@@ -35,6 +35,7 @@ public class ActivityPaciente extends AppCompatActivity implements OnMapReadyCal
     private int m_idPaciente;
     private double m_latitud = 0;
     private double m_longitud = 0;
+    private double m_latitud_v = 0;
     GPSTracker gps;
 
     @Override
@@ -70,6 +71,7 @@ public class ActivityPaciente extends AppCompatActivity implements OnMapReadyCal
         else
             m_idPaciente = 0;
 
+        m_latitud_v = m_latitud;
         mSupportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mSupportMapFragment.getMapAsync(ActivityPaciente.this);
 
@@ -84,14 +86,17 @@ public class ActivityPaciente extends AppCompatActivity implements OnMapReadyCal
             if(gps.canGetLocation()){
                 m_latitud = gps.getLatitude();
                 m_longitud = gps.getLongitude();
+                m_latitud_v = gps.getLatitude();
             }
             else{
+                m_latitud_v = 0;
                 gps.showSettingsAlert();
             }
 
-            Toast.makeText(ActivityPaciente.this,"Ubicación GPS", Toast.LENGTH_LONG).show();
-            mSupportMapFragment.getMapAsync(ActivityPaciente.this);
-
+            if ( m_latitud_v != 0 ){
+                Toast.makeText(ActivityPaciente.this,R.string.ubicaciongps, Toast.LENGTH_LONG).show();
+                mSupportMapFragment.getMapAsync(ActivityPaciente.this);
+            }
 
         }
     };
@@ -132,6 +137,11 @@ public class ActivityPaciente extends AppCompatActivity implements OnMapReadyCal
                 return false;
             }
 
+            if ( m_latitud_v == 0 ){
+                Toast.makeText(ActivityPaciente.this, R.string.error_ubicaciongps, Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
             Paciente paciente = new Paciente();
             paciente.setPaciente(etPaciente.getText().toString().trim());
             if(rbF.isChecked())
@@ -164,7 +174,7 @@ public class ActivityPaciente extends AppCompatActivity implements OnMapReadyCal
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
         mGoogleMap.clear();
-        if (m_latitud != 0){
+        if (m_latitud_v != 0){
             mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(m_latitud, m_longitud)).title("Ubicación").draggable(true));
             mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(m_latitud, m_longitud)));
         }
