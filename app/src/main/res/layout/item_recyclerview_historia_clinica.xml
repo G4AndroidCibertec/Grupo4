@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="@drawable/tarjeta"
     android:layout_marginBottom="@dimen/dos"
+    android:background="@drawable/tarjeta"
+    android:orientation="vertical"
     android:padding="@dimen/margen">
 
     <LinearLayout
@@ -15,13 +15,15 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dos"
             android:layout_weight="1"
-            android:text="@string/ifechaAtencion" />
+            android:text="@string/ifecha_atencion" />
 
         <TextView
             android:id="@+id/itvFechaAtencion"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dos"
             android:layout_weight="1" />
 
     </LinearLayout>
@@ -35,8 +37,8 @@
         android:id="@+id/itvMotivo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:singleLine="false"
-        android:maxLines="3" />
+        android:maxLines="3"
+        android:singleLine="false" />
 
     <TextView
         android:id="@+id/itvIdAtencion"
@@ -47,14 +49,15 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dos"
         android:text="@string/itratamiento" />
 
     <TextView
         android:id="@+id/itvTratamiento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:singleLine="false"
-        android:maxLines="6" />
+        android:maxLines="6"
+        android:singleLine="false" />
 
 
 </LinearLayout>
