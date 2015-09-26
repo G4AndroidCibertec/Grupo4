@@ -66,7 +66,9 @@ public class ActivityCita extends AppCompatActivity {
     View.OnClickListener mostrarDialogoFecha = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            new DatePickerDialog(ActivityCita.this, ponFecha, calendario.get(Calendar.YEAR), calendario.get(Calendar.MONTH), calendario.get(Calendar.DAY_OF_MONTH)).show();
+            DatePickerDialog dpd =  new DatePickerDialog(ActivityCita.this, ponFecha, calendario.get(Calendar.YEAR), calendario.get(Calendar.MONTH), calendario.get(Calendar.DAY_OF_MONTH));
+            dpd.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis()-1000);
+            dpd.show();
         }
     };
 

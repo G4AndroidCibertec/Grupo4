@@ -22,8 +22,8 @@
     <string name="lcita">Lista de Citas</string>
     <string name="verHC">Historia Clínica</string>
 
-    <string name="error_fecha">Ingresar fecha: dd/mm/aaaa</string>
-    <string name="error_hora">Ingresar hora: hh:00pm</string>
+    <string name="error_fecha">Seleccionar fecha</string>
+    <string name="error_hora">Seleccionar hora</string>
     <string name="error_hora_fin">Fin debe ser mayor a Inicio</string>
     <string name="ok_eliminar_cita">Cita eliminada</string>
     <string name="ok_insertar_cita">Nueva Cita registrada</string>
@@ -69,7 +69,7 @@
     <string name="Motivo">Motivo de la Consulta</string>
     <string name="Tratamiento">Tratamiento</string>
     <string name="Gps">Ubicación GPS</string>
-    <string name="error_fecha_atencion">Ingresar fecha de atencion</string>
+    <string name="error_fecha_atencion">Selecionar fecha</string>
     <string name="app_version">1.0.0</string>
     
     <string name="action_settings">Guardar</string>
